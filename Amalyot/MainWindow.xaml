@@ -1,0 +1,247 @@
+﻿<Window x:Class="Amalyot.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Amalyot"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="MainWindow" Height="800" Width="1200"
+        ResizeMode="NoResize"
+WindowStyle="None"
+AllowsTransparency="True">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" 
+                 MouseDown="brDragable_MouseDown" 
+            Background="{DynamicResource PrimaryBackground}"
+            CornerRadius="10 10 0 0"
+            BorderBrush="{DynamicResource PrimaryBorderColor}"
+            BorderThickness="0 0 0 1">
+            <Grid Margin="10 0 10 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <Border x:Name="brDragable" 
+                    Grid.Column="0" 
+                    Background="{DynamicResource PrimaryBackground}"
+                    Cursor="ScrollAll">
+                </Border>
+                <StackPanel Grid.Column="1" 
+                Orientation="Horizontal">
+                    <Button x:Name="btnMinimize" Click="btnMinimize_Click" Style="{DynamicResource MinimizedButton}"/>
+                    <Button x:Name="btnMaximize" Click="btnMaximize_Click" Style="{DynamicResource MaximazedButton}"/>
+                    <Button x:Name="btnClose" Click="btnClose_Click" Style="{DynamicResource CloseButton}"/>
+
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.7*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="3.5*"/>
+                        <ColumnDefinition Width="0.9*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Width="43" 
+                        Height="43" Visibility="Hidden"
+                        Background="Transparent" BorderBrush="Transparent"
+                        Click="PreviewCategorie_Click" x:Name="PreviewCategorie">
+                        <Viewbox Width="35" Height="35">
+                            <materialDesign:PackIcon Kind="ArrowLeftThick" Foreground="#000000"/>
+                        </Viewbox>
+                    </Button>
+                    
+
+                    <StackPanel x:Name="CategoryBar" Orientation="Horizontal" Grid.Column="1">
+
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Orientation="Horizontal">
+                        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="15" Margin="2"
+                                Width="140">
+                            <TextBox Background="Transparent" BorderBrush="Transparent" Margin="2"
+                                materialDesign:HintAssist.Hint="Qidirish" x:Name="Searchtext" Padding="5" FontSize="16"/>
+                        </Border>
+                        <Button Grid.Column="0" Width="43" 
+                            Height="43"
+                            Background="Transparent" BorderBrush="Transparent"
+                            Click="SerarchButton" >
+                            <Viewbox Width="35" Height="35">
+                                <materialDesign:PackIcon Kind="Magnify" Foreground="#000000"/>
+                            </Viewbox>
+                        </Button>
+
+                    </StackPanel>
+                    <Button Click="otherCategories_Click" Background="Transparent" BorderBrush="Transparent"
+                            Grid.Column="3" x:Name="otherCategories" Width="42" Height="42" Padding="3">
+                        <Viewbox Width="35" Height="35">
+                            <materialDesign:PackIcon Kind="ArrowRightThick" Foreground="#000000"/>
+                        </Viewbox>
+                    </Button>
+                </Grid>
+
+                <WrapPanel Orientation="Horizontal"
+                   Grid.Row="1" 
+                        x:Name="productBar"
+                           
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Stretch">
+                    <ScrollViewer
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Visibility="Visible">
+                        <Border 
+                    Background="LightGray" 
+                    BorderBrush="LightGray" BorderThickness="0"
+                    Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=WrapPanel}}"
+                    Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=WrapPanel}}">
+                       
+                    
+                    </Border>
+                        </ScrollViewer>
+                </WrapPanel>
+
+            </Grid>
+            <Grid Grid.Column="1" Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="8*"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="1" CornerRadius="0 0 0 10"
+        Background="#F5F5F5">
+                    <ScrollViewer Margin="5 5 0 5">
+                        <WrapPanel x:Name="wpProducts">
+
+                        </WrapPanel>
+                    </ScrollViewer>
+                </Border>
+
+                <Border Grid.Column="1" Background="#FFFFFF" CornerRadius="0 0 10 0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="110"/>
+                        </Grid.RowDefinitions>
+                        <ScrollViewer Margin="5 5 0 5"
+                            Grid.Row="0" VerticalScrollBarVisibility="Hidden">
+                            <DataGrid 
+                                        Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Grid}}"
+                                        Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Grid}}"
+                                x:Name="dataGrid" AutoGenerateColumns="False" 
+                                        Background="{DynamicResource TableIneerBack}"
+                                        ScrollViewer.CanContentScroll="False"
+                                        VerticalScrollBarVisibility="Auto"
+                                        HorizontalScrollBarVisibility="Auto"
+                                        IsReadOnly="True" ItemsSource="{Binding Order}">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header='Mahsulot nomi' Binding="{Binding Name}" Width="*"/>
+                                    <DataGridTemplateColumn Header="Soni" Width="80">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Button Background="Transparent" BorderBrush="Transparent" Margin="0 -6 0 0" Width="35" Height="35" Padding="4"
+                                                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                                                          Click="Button_Click_Basket_Minus" CommandParameter="{Binding}" materialDesign:ButtonAssist.CornerRadius="7">
+                                                        <Viewbox Width="25" Height="25">
+                                                            <materialDesign:PackIcon Kind="Minus" Foreground="#000000"/>
+                                                        </Viewbox>
+                                                    </Button>
+
+                                                    <TextBlock Text="{Binding Count}" Margin="0 2 0 0" FontSize="16"/>
+
+                                                    <Button Background="Transparent" BorderBrush="Transparent" Margin="0 -6 0 0" Width="35" Height="35" Padding="4"
+                                                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                                                          Click="Button_Click_Basket_Plus" CommandParameter="{Binding}" materialDesign:ButtonAssist.CornerRadius="7">
+                                                        <Viewbox Width="25" Height="25">
+                                                            <materialDesign:PackIcon Kind="Plus" Foreground="#000000"/>
+                                                        </Viewbox>
+                                                    </Button>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTextColumn Header='Narxi' Binding="{Binding Price}" Width="70"/>
+                                    
+                                    <DataGridTemplateColumn Header="" Width="50">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Background="Transparent" BorderBrush="Transparent" Margin="3 0 0 0" Width="45" Height="35" Padding="5"
+                                                      IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                                                      Click="Button_Click_Basket_Trash" CommandParameter="{Binding}" materialDesign:ButtonAssist.CornerRadius="7">
+                                                    <Viewbox Width="25" Height="25">
+                                                        <materialDesign:PackIcon Kind="DeleteOutline" Foreground="#FF3C5F"/>
+                                                    </Viewbox>
+                                                </Button>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </ScrollViewer>
+                        <Border Margin="15 15 15 0" Grid.Row="1" CornerRadius="15 15 0 0" Background="#F5F5F5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.9*"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Content="Due" FontSize="19" 
+                                           FontFamily="Italic"
+                                           FontWeight="DemiBold"
+                                           Margin="10"/>
+                                    <ComboBox Grid.Row="1" Width="190" Height="35"
+                                            x:Name="printerComboBox" 
+                                            materialDesign:HintAssist.Hint="tanlang printer"/>
+                                    
+                                    
+                                </Grid>
+                                
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Label  Grid.Row="0" x:Name="lbTotalBalance" Content="0$" FontSize="18" 
+                                    FontFamily="Arial Black"
+                                    Margin="15 10 15 10" Foreground="#F09246"
+                                    HorizontalAlignment="Right"/>
+
+                                    <Button Grid.Row="1" Background="Transparent" BorderBrush="Transparent" Margin="0 -10 0 0" Width="45" Height="45" Padding="4"
+                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                                        Click="ClickButtonGEtInvoice" CommandParameter="{Binding}" materialDesign:ButtonAssist.CornerRadius="7">
+                                        <Viewbox Width="35" Height="35">
+                                            <materialDesign:PackIcon Kind="Printer" Foreground="#000000"/>
+                                        </Viewbox>
+                                    </Button>
+
+                                </Grid>
+
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Border>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

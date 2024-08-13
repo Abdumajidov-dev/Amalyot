@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34928.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amalyot", "Amalyot\Amalyot.csproj", "{968747DD-1A09-498F-A043-D0AD57C0372B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{968747DD-1A09-498F-A043-D0AD57C0372B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{968747DD-1A09-498F-A043-D0AD57C0372B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{968747DD-1A09-498F-A043-D0AD57C0372B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{968747DD-1A09-498F-A043-D0AD57C0372B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7374EB1F-8B98-403C-95B3-F95EE33F6D92}
+	EndGlobalSection
+EndGlobal
